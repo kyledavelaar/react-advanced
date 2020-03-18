@@ -1,32 +1,33 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button';
-import CardActions from '@material-ui/core/CardActions';
+import PortalModalContainer from './portals/PortalModalContainer';
+import HocExample from './hoc/HocExample';
 
-import Signin from './Signin';
-import Collapsable from './Collapsable';
-import Blog from './Blog';
-import Table from './Table';
 
 
 function App() {
+
   return (
     <div className="App">
-      {/* <CardActions>
-        <Button
-          // variant="contained"
-          // color="primary"
-          onClick={() => {console.log('hi')}}
-        >
-          Login
-        </Button>
-      </CardActions>
-      <Collapsable></Collapsable>
-      <Signin></Signin> */}
-      <Blog></Blog>
-      <Table></Table>
+      <HocExample />
+      <Profiler id="portal" onRender={onRender}>
+        <div id="app-root">
+          <PortalModalContainer />
+        </div>
+        <div id="modal-root">Root</div>
+      </Profiler>
     </div>
   );
+}
+
+function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime, interactions) {
+  console.log(id)
+  console.log(phase)
+  console.log(actualDuration)
+  console.log(baseDuration)
+  console.log(startTime)
+  console.log(commitTime)
+  console.log(interactions)
 }
 
 export default App;
